@@ -2,7 +2,7 @@ Challenge: http://rce-me.ctf.actvn.edu.vn/
 
 ![image](https://user-images.githubusercontent.com/35491855/154733589-8e729f8d-73a0-4107-b3bc-e77978980ed7.png)
 
-From the begining, the challenge show us that this website is vulnerable to LFI, but the challenge requires us to find and exploit a RCE, and the `etc/passwd` clearly doesn't play any role here. There is a couple of methods to lead to RCE from LFI, i'm not going to cover all of them in this writeup.
+From the begining, the challenge show us that this website is vulnerable to LFI, but the challenge requires us to find and exploit a RCE, and the `etc/passwd` clearly doesn't play any role here. There are a couple of methods to lead to RCE from LFI, i'm not going to cover all of them in this writeup.
 
 First i tried to use `dirsearch` to check for any interesting file or path, but no hope tho. After that, i read the hint that said `I am using php-fpm alpine docker`, so i tried to find an image, deployed it to docker and inspected the file structure in order to find the "key" but still. After countless attempts, i tried to use some other technique like **php wrapper** and found out that i can read the source of the index page - which gave me the hint to figure out the way to solve this challenge.
 
