@@ -3,7 +3,7 @@ Challenge: http://try-sqlmap.ctf.actvn.edu.vn/
 ![image](https://user-images.githubusercontent.com/35491855/154800109-eeb85e75-0387-4288-b1a1-ae2d7c4d058a.png)
 
 
-As the title of the challenge, it tells us to try `SQL Map`, but in this case this powerful tool is not gonna help us get the flag, but it gave us a hint. 
+As the title of the challenge, it tells us to try `SQL Map`. However in this case this powerful tool is not gonna help us get the flag, but it gave us a hint. 
 
 ![image](https://user-images.githubusercontent.com/35491855/154800002-0e97d92c-a1dd-4f22-b57d-4cd5e115c2b8.png)
 
