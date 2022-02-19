@@ -23,7 +23,7 @@ Wait, it show us the index page's content, something is not right here, we shoul
 
 ![image](https://user-images.githubusercontent.com/35491855/154800416-1645ab03-535e-4789-ac0a-a01d546a31f0.png)
 
-Good, now we have to find a way to reduce the length of the query and as the length of flag table name is longer that 32 characters, we will have to use `mid` function to bypass the output check. This is my query:
+Good, now we have to find a way to reduce the length of the query and as the length of flag table name is longer than 32 characters, we will have to use `mid` function to bypass the output check. This is my query:
 
 `http://try-sqlmap.ctf.actvn.edu.vn/?order=extractvalue(0,concat(0,(SELECT+mid(table_name,1,31)+FROM+information_schema.tables+limit+1)))`
 
