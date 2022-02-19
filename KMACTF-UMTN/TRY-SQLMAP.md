@@ -44,3 +44,5 @@ Finally, extract the flag:
 
 final flag: `KMACTF{X_Ooooooooooooorder_By_Nooooooooooooooooooone_SQLMaaaaaaaaaaaaaaaap?!!!!!!!!!!!!}`
 
+Special Thanks to **Taidh**, who helped me a lot in figuring out this challenge
+
