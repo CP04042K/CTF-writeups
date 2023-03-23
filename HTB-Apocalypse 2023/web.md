@@ -1,4 +1,5 @@
 ## Trapped Source
+#### Very Easy
 View source HTML của trang ta sẽ thấy đoạn JS sau:
 ```html
 <script>
@@ -14,6 +15,7 @@ View source HTML của trang ta sẽ thấy đoạn JS sau:
 có được `correctPin` là 8291, bấm đúng số đó vào cái máy ta được flag, f12 lên copy flag rồi submit
 
 ## Gunhead
+#### Very Easy
 Trên web có một chức năng giúp ta chạy các lệnh, một trong các lệnh đó là /ping \<ip\>, đọc source phía server đầu tiên ta thấy có route đến `/api/ping`
 ```php
 $router->new('POST', '/api/ping', 'ReconController@ping');
@@ -33,6 +35,7 @@ Thêm một dấu `;` để kết thúc lệnh trước, từ đây ta có thể
 ![](https://i.imgur.com/clsznAm.png)
 
 ## Drobot
+#### Very Easy
 Chức năng đầu tiên đập vào mắt là login, vào file `routes.py` -- nơi chứa các routing của web, sẽ thấy nó đang gọi đến hàm `login` trong `database.py`
 ```python 
 @api.route('/login', methods=['POST'])
@@ -73,6 +76,7 @@ HTB{p4r4m3t3r1z4t10n_1s_1mp0rt4nt!!!}
 ```
 
 ## Passman
+#### Easy
 Bài này dùng graphql để call tới API, xem kỹ tất cả type trong file `GraphqlHelper.js` thì gần như đều kiểm tra xem đã login chưa, tuy nhiên lại không kiểm tra xem user đã login là user gì, cụ thể là ở field `UpdatePassword`, do không kiểm tra user đang đăng nhập và user sắp thay đổi có giống nhau hay không nên ta có thể lợi dụng để update password của bất kì user nào sau khi login => Lỗi IDOR.
 
 Nhìn vào file `entrypoint.sh` sẽ thấy trong phrases của admin sẽ có flag, ta sẽ lợi dụng bug trên để update password của admin và vào đọc flag
@@ -112,6 +116,7 @@ Login vào với account `admin:123`
 `HTB{1d0r5_4r3_s1mpl3_4nd_1mp4ctful!!}`
 
 ## Orbital
+#### Easy
 Đầu tiên là lỗi SQL Injection tại chức năng login, ta có thể tìm thấy đoạn code xử lý tại file `database.py`
 ```python
 def login(username, password):
@@ -188,6 +193,7 @@ HTB{T1m3_b4$3d_$ql1_4r3_fun!!!}
 p/s: hình như intend bài này là timebased hay sao ấy :V
 
 ## Didactic Octo Paddles
+#### Medium
 Đến những bài này ta sẽ đi thẳng vào vấn đề luôn.
 
 Trong các middleware được sử dụng cho các route thì endpoint `/admin` sẽ được sử dụng middleware riêng là `AdminMiddleware`, ở đây chứa logic sử dụng JWT 
@@ -228,7 +234,7 @@ Tạo một user mới với tên là payload để đọc `/flag.txt`:
 ![](https://i.imgur.com/bcvPkyf.png)
 
 ## TrapTrack
-
+#### Hard
 Ở bài này sau khi đọc source code, ta sẽ thấy thông tin login của admin ở file `challenge/application/config.py`
 ```python 
 class Config(object):
@@ -334,6 +340,7 @@ HTB{tr4p_qu3u3d_t0_rc3!}
 ```
 
 ## UnEarthly Shop
+#### Hard
 Web chia làm 2 phần là frontend và backend, cùng server
 
 Sài thử web thì có một request sau:
