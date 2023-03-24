@@ -235,7 +235,7 @@ Tạo một user mới với tên là payload để đọc `/flag.txt`:
 
 ## SpyBug
 #### Medium
-Bài này đọc sơ qua source ta tóm lại được là ứng dụng ngoài đăng nhập chính có thể cho ta tạo các agents với `24cbaf02-e82a-4079-8e37-f1724d12df28` và `c083682c-6685-44db-a207-955d220be2a9`. Ở panel thì chỉ có admin mới vào được, bên trong panel thì nếu user login vào là admin thì sẽ nhả ra flag, đọc file `panel.pug` để ý thấy:
+Bài này đọc sơ qua source ta tóm lại được là ứng dụng ngoài đăng nhập chính có thể cho ta tạo các agents với `identifier` và `token`. Ở panel thì chỉ có admin mới vào được, bên trong panel thì nếu user login vào là admin thì sẽ nhả ra flag, đọc file `panel.pug` để ý thấy:
 ```
 td= agent.identifier
 td !{agent.hostname}
