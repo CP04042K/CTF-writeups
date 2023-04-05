@@ -1,7 +1,6 @@
 #!/bin/python
 from random import shuffle
 import string 
-import itertools
 
 content = "fa f8 f7 f4 f1 ec e8 e7 e1 e1 3e 34 31 31 30 2e 2d 28 21 1a 15 13 0f 0c 0b 09 08 08 02"
 content = content.split(" ")
