@@ -49,8 +49,7 @@ Tại sao lại như thế? Theo như mình test thì đây là một behavior k
     ]
 }
 ```
-Tuy coupon không được cộng chuỗi vào nhưng tiền thì đã cộng do câu query `SELECT` để lấy value của coupon trước đó đã thành công theo như behavior ta đã bàn 
-Gửi đi nhiều lần và lấy jwt đó để tiếp tục mua item `C8` ta sẽ có được flag
+Vì coupon không được cộng chuỗi vào nhưng tiền thì đã cộng do câu query `SELECT` để lấy value của coupon trước đó đã thành công theo như behavior ta đã bàn nên ta có thể gửi đi nhiều lần và cộng tiền vô hạn, lấy jwt đó để tiếp tục mua item `C8` ta sẽ có được flag
 
 ![](https://i.imgur.com/w75EwSD.png)
 
