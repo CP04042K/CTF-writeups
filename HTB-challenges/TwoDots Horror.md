@@ -45,6 +45,8 @@ Vậy thêm 3 byte đầu vào thôi, nhưng mà lại phát sinh vấn đề l�
 
 Ok vẫn lỗi nhưng mà lỗi khác :v có vẻ ta đã pass qua vòng check đầu, giờ đến vòng check 2 là `image-size`, lại như module kia, ta lại mò đến source để xem cách nó xử lý
 
+https://github.com/image-size/image-size
+
 Code thằng này nhiều hơn thằng kia một chút, tóm lại thì logic xử lý chính nó sẽ thế này. Check type, vì đang là jpg nên nó sẽ chạy đến phần lấy size của JPG. Tại hàm `calculate` của JPG skip qua 4 signature byte đầu, read 2 byte đầu từ buffer và chứa vào biến `i`, biến i sẽ truyền vào `validateBuffer`, tại đây check nếu thấy i lớn hơn size của buffer truyền vô (cái ảnh) nó sẽ throw exception, và nếu tại index i của buffer mà character không phải 0xff (`ÿ`) thì nó chũng throw exception. Nếu pass qua vòng này ta sẽ tới phần check xem là tại vị trí i + 1 nếu là một trong các byte `0xC0 | 0xC1  | 0xC2` thì tí sẽ return về size của ảnh.
 
 Ok xong rồi, giờ ý tưởng của mình là craft một payload để khiến i nó nhỏ nhỏ xíu (vì nó đọc 2 byte, ví dụ aa là 0x61 và 0x61 nó sẽ đọc thành 0x6161), vì nó skip qua 4 byte đầu nên mình sẽ padding cái signature byte thêm 1 byte, sau đó dùng 2 ký tự xuống dòng (0x0a0a) sẽ làm cho cái i nó nhỏ nhỏ để tí không phải padding quá nhiều, và vì a [\n\n] = ... trong JS cũng hợp lệ nên không vấn đề gì
