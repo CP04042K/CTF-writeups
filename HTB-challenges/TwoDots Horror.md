@@ -69,6 +69,7 @@ Sau khi làm thử thì không thấy request gửi về webhook, thử trên tr
 Research một hồi mình tìm được bài https://portswigger.net/research/bypassing-csp-using-polyglot-jpegs
 
 Thử thêm `charset="ISO-8859-1"` vào thẻ script và gửi lại thì request đã nằm trên webhook cùng với flag
+
 Payload: 
 ```
 </p>a.a.<script charset="ISO-8859-1" src="/api/avatar/shin24"></script>
