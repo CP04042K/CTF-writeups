@@ -145,6 +145,7 @@ Giờ ta cat flag thôi nhở
 
 Làm gì dễ thế =))), đây là state 2, ta sẽ phải priv esc để đọc được flag, check owner thấy flag.txt là của admin, vậy ta phải nâng quyền mình lên admin, trong các file mà ta được đưa có 2 file SUID binary, lúc đầu thì mình cũng khá confuse, để đỡ dài dòng thì mình sẽ nói luôn là ta cần chú ý vào file `list_uploads`, đưa vào IDA và f5 lên ta sẽ thấy nó đang gọi đến binary `ls`
 ![](https://i.imgur.com/5L8QjUR.png)
+
 Nhưng mà lưu ý là ở đây nó gọi đến ls, chứ không phải `/bin/ls`, vậy thì ta có thể dùng PATH injection, tạo một file tên `ls` ở một folder nào đó (`tmp` đi) rồi chạy lại SUID kia, file `ls` sẽ là một file để spawn shell. Nội dung file `ls` của mình (thật ra là của robbert viết, pao thủ thế giới)
 ```c 
 #define _GNU_SOURCE
