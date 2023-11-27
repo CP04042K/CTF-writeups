@@ -62,7 +62,7 @@ ROP gadget để pop 3 stack:
 Vì trước đó thì mình có bật ASLR, nên ta sẽ cần leak địa chỉ của stack bất kì để tìm ra return address của `read`, cùng với đó là vì không có libc nên `/bin/sh` mình sẽ nèm vào phía dưới ROP chain, nên ta cũng cần tính toán offset để tìm ra địa chỉ của `/bin/sh` sau đó pop vào ebx
 
 Solve script:
-```
+```py
 from pwn import *
 
 def write_rop(data, loc, f=None):
