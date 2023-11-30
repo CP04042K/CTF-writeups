@@ -70,7 +70,7 @@ Content-Length: {len(script)}\r
     create_note(ans, id)
 
 def fill_5_other_connection(id):
-    for i in range(5):
+    for _ in range(5):
         create_note("😍"*(1448*10), id)
 
 
