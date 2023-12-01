@@ -32,11 +32,11 @@ Anatomy:
 -----------------------------------------------------------
 admin bot -------------------------------> frontend
 admin bot --------------node#0-----------> CDN ( finish in ns )
-admin bot --------------node#1-----------> CDN ( finish in n+1s )
-admin bot --------------node#2-----------> CDN ( finish in n+1s )
-admin bot --------------node#3-----------> CDN ( finish in n+1s )
-admin bot --------------node#4-----------> CDN ( finish in n+1s )
-admin bot --------------node#5-----------> CDN ( finish in n+1s )
+admin bot --------------node#1-----------> CDN ( finish in n+xs )
+admin bot --------------node#2-----------> CDN ( finish in n+xs )
+admin bot --------------node#3-----------> CDN ( finish in n+xs )
+admin bot --------------node#4-----------> CDN ( finish in n+xs )
+admin bot --------------node#5-----------> CDN ( finish in n+xs )
 admin bot --------------node#6-----------> CDN (reuse connection of node#0, fetch malicious response)
 -----------------------------------------------------------
 ```
