@@ -1,5 +1,6 @@
 # The challenge
 name: apexsurvive
+
 difficulty: insane
 # Solution
 Ở bài này, mục tiêu của ta sẽ là bằng cách nào đó đọc được file `/root/flag`, đề cho binary `/readflag` và set permission file flag là `600` nên có thể mục tiêu của ta sẽ là thực hiện RCE rồi sau đó chạy `/readflag` để đọc flag, tuy nhiên uwsgi lại được chạy với user là `root` do đó ta chỉ cần đọc được file là được, hẳn đây là một lỗi configuration của author. Do bài này tác giả đã có writeup nên mình sẽ viết lại một unintend solution do mình và anh `@AP` tìm được
