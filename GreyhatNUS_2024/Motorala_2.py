@@ -1,3 +1,5 @@
+# grey{s1mpl3_buff3r_0v3rfl0w_w4snt_1t?_r3m3mb3r_t0_r34d_th3_st0ryl1ne:)}
+
 from pwn import *
 
 io = process("/home/shin24/security/ctf/greyhat/Motorala/wasmtime/target/debug/wasmtime --dir=./ --config=./cache.toml ./chall".split(" "))
